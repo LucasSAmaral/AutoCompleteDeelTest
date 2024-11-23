@@ -1,4 +1,5 @@
 import Input from './components/Input';
+import Suggestions from './components/Suggestions';
 import './style.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <p className="subtitle">Search about web development technologies</p>
       <div className="search-area">
         <Input />
+        <Suggestions />
       </div>
     </div>
   );
