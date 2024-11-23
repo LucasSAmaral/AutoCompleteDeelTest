@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "start:front": "npm run dev --prefix frontend",
-    "start:back": "npm run start --prefix backend",
-    "start:both": "npm run start:front",
+    "start:back": "npm run dev --prefix backend",
+    "start:both": "concurrently --names \"FRONT,BACK\" \"npm run start:front\" \"npm run start:back\"",
     "install:front": "npm install --prefix frontend",
     "install:back": "npm install --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }
