@@ -7,8 +7,16 @@ const port = 4000;
 
 app.use(cors());
 
+const webTechnologies = ['React', 'React Native', 'CSS', 'Rust'];
+
 app.get('/api/autocomplete', (req: Request, res: Response) => {
-  res.send('Hello');
+  const queryParams = req.query.search as string;
+
+  const filteredTechnologies = webTechnologies.filter(technology =>
+    technology.toLowerCase().startsWith(queryParams.toLowerCase()),
+  );
+
+  res.json(filteredTechnologies);
 });
 
 app.listen(port, () => {
