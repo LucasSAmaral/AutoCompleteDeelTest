@@ -1,5 +1,16 @@
+import Input from './components/Input';
+import './style.css';
+
 function App() {
-  return <></>;
+  return (
+    <div className="wrapper">
+      <h1 className="title">Auto Complete</h1>
+      <p className="subtitle">Search about web development technologies</p>
+      <div className="search-area">
+        <Input />
+      </div>
+    </div>
+  );
 }
 
 export default App;
