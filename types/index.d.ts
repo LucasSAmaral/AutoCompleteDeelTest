@@ -1,4 +1,1 @@
-export interface AutoCompleteResponse {
-  suggestions?: string[];
-  noSuggestionsFoundMessage?: string;
-}
+/// <reference path="request/request.d.ts" />

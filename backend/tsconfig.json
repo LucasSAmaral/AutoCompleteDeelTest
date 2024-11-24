@@ -7,5 +7,6 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*", "../types/**/*"]
+  "files": ["../types/index.d.ts"],
+  "include": ["src/**/*", "**/*.ts"]
 }
