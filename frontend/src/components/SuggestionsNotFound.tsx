@@ -1,17 +1,9 @@
-import { useAutoComplete } from '../hooks/useAutoComplete';
-
-const SuggestionsNotFound = () => {
-  const { suggestionsNotFoundMessage } = useAutoComplete();
-
-  if (suggestionsNotFoundMessage) {
-    return (
-      <div className="suggestions-not-found">
-        <p>{suggestionsNotFoundMessage}</p>
-      </div>
-    );
-  }
-
-  return null;
+const SuggestionsNotFound: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <div className="suggestions-not-found">
+      <p>{children}</p>
+    </div>
+  );
 };
 
 export default SuggestionsNotFound;

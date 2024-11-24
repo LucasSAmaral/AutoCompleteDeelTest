@@ -1,25 +1,21 @@
-import { useAutoComplete } from '../hooks/useAutoComplete';
+interface InputProps {
+  inputSearchValue: string;
+  inputSelectedValue: string;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  shouldRemoveBorderBottom: boolean;
+}
 
-const Input = () => {
-  const {
-    inputSearchValue,
-    inputSelectedValue,
-    setInputSearchValue,
-    setInputSelectedValue,
-    shouldShowSuggestions,
-    suggestionsNotFoundMessage,
-  } = useAutoComplete();
-
+const Input: React.FC<InputProps> = ({
+  inputSearchValue,
+  inputSelectedValue,
+  handleInputChange,
+  shouldRemoveBorderBottom,
+}) => {
   return (
     <input
-      className={`search-input ${
-        shouldShowSuggestions || suggestionsNotFoundMessage ? 'no-border-bottom' : ''
-      }`}
+      className={`search-input ${shouldRemoveBorderBottom ? 'no-border-bottom' : ''}`}
       value={inputSelectedValue === '' ? inputSearchValue : inputSelectedValue}
-      onChange={e => {
-        setInputSelectedValue('');
-        setInputSearchValue(e.target.value);
-      }}
+      onChange={handleInputChange}
       type="search"
     />
   );

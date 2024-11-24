@@ -1,25 +1,14 @@
-import { useAutoComplete } from '../hooks/useAutoComplete';
+interface SuggestionsProps {
+  suggestions: string[];
+  handleSuggestionClick: (suggestion: string) => void;
+}
 
-const Suggestions = () => {
-  const { suggestions, setInputSelectedValue, shouldShowSuggestions, setShouldShowSuggestions } =
-    useAutoComplete();
-
-  if (!shouldShowSuggestions) {
-    return null;
-  }
-
-
+const Suggestions: React.FC<SuggestionsProps> = ({ suggestions, handleSuggestionClick }) => {
   return (
     <div className="suggestions-wrapper">
       <ul>
         {suggestions.map((suggestion, index) => (
-          <li
-            key={`${suggestion}-${index}`}
-            onClick={() => {
-              setShouldShowSuggestions(false);
-              setInputSelectedValue(suggestion);
-            }}
-          >
+          <li key={`${suggestion}-${index}`} onClick={() => handleSuggestionClick(suggestion)}>
             {suggestion}
           </li>
         ))}
