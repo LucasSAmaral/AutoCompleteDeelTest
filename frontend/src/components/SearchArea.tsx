@@ -1,29 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Input from './Input';
 import Suggestions from './Suggestions';
 import SuggestionsNotFound from './SuggestionsNotFound';
 import { useFetchSuggestions } from '../hooks/useFetchSuggestions';
-import { getLocalStorageHistory, setLocalStorageHistory } from '../helpers/localStorageHelpers';
 import SearchHistory from './SearchHistory';
+import { useSearchHistory } from '../hooks/useSearchHistory';
 
 const SearchArea = () => {
   const [inputSearchValue, setInputSearchValue] = useState('');
   const [inputSelectedValue, setInputSelectedValue] = useState('');
   const [isInputFocused, setIsInputFocused] = useState(false);
 
-  const [searchHistory, setSearchHistory] = useState<string[]>(getLocalStorageHistory());
+  const { searchHistory, setSearchHistory } = useSearchHistory();
 
   const { suggestions, setSuggestions, suggestionsNotFoundMessage } =
     useFetchSuggestions(inputSearchValue);
-
-  useEffect(() => {
-    if (searchHistory.length === 5) {
-      setLocalStorageHistory(searchHistory);
-      // Send history to api
-    } else {
-      setLocalStorageHistory(searchHistory);
-    }
-  }, [searchHistory]);
 
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setInputSelectedValue('');
@@ -42,15 +33,12 @@ const SearchArea = () => {
       });
       setSuggestions([]);
     },
-    [setSuggestions, setInputSelectedValue],
+    [setSuggestions, setSearchHistory],
   );
 
-  const handleSearchHistoryClick = useCallback(
-    (history: string) => {
-      setInputSelectedValue(history);
-    },
-    [setInputSelectedValue],
-  );
+  const handleSearchHistoryClick = useCallback((history: string) => {
+    setInputSelectedValue(history);
+  }, []);
 
   return (
     <div className="search-area">
