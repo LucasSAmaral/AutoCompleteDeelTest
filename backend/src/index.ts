@@ -9,7 +9,19 @@ const port = 4000;
 
 app.use(cors());
 
-const webTechnologies = ['React', 'React Native', 'CSS', 'Rust', 'Styled Components'];
+const webTechnologies = [
+  'React',
+  'React Native',
+  'CSS',
+  'Rust',
+  'Styled Components',
+  'React Testing Library',
+  'Cypress',
+  'SCSS',
+  'SASS',
+];
+
+let searchHistory: string[] = [];
 
 app.get(
   '/api/autocomplete',
@@ -31,6 +43,10 @@ app.get(
     return;
   },
 );
+
+app.get('/api/autocomplete/history', (req: Request, res: Response) => {
+  res.json(searchHistory);
+});
 
 app.listen(port, () => {
   console.log(`Running on port ${port}`);
