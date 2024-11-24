@@ -6,7 +6,7 @@ interface HighlightTextProps {
 const HighlightText: React.FC<HighlightTextProps> = ({ suggestion, inputSearchValue }) => {
   if (!inputSearchValue) return <>{suggestion}</>;
 
-  const rgx = new RegExp(`(${inputSearchValue.trim().replace(/\s+/g, '\\s*')})`, 'i');
+  const rgx = new RegExp(`\\b(${inputSearchValue.trim().replace(/\s+/g, '\\s*')})`, 'gi');
   const splittedSuggestion = suggestion.split(rgx);
 
   return (
