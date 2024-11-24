@@ -8,7 +8,6 @@ const SearchArea = () => {
   const [inputSelectedValue, setInputSelectedValue] = useState('');
   const [suggestionsNotFoundMessage, setSuggestionsNotFoundMessage] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [shouldShowSuggestions, setShouldShowSuggestions] = useState(false);
 
   const fetchSuggestions = useCallback(async () => {
     try {
@@ -36,21 +35,17 @@ const SearchArea = () => {
   }, [inputSearchValue]);
 
   useEffect(() => {
-    if (inputSearchValue !== '') {
-      fetchSuggestions();
-    } else {
-      setShouldShowSuggestions(false);
-      setSuggestionsNotFoundMessage('');
-    }
-  }, [inputSearchValue, fetchSuggestions]);
+    const timeout = setTimeout(() => {
+      if (inputSearchValue !== '') {
+        fetchSuggestions();
+      } else {
+        setSuggestions([]);
+        setSuggestionsNotFoundMessage('');
+      }
+    }, 300);
 
-  useEffect(() => {
-    if (suggestions.length === 0) {
-      setShouldShowSuggestions(false);
-    } else {
-      setShouldShowSuggestions(true);
-    }
-  }, [suggestions]);
+    return () => clearTimeout(timeout);
+  }, [inputSearchValue, fetchSuggestions]);
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,10 +57,10 @@ const SearchArea = () => {
 
   const handleSuggestionClick = useCallback(
     (suggestion: string) => {
-      setShouldShowSuggestions(false);
       setInputSelectedValue(suggestion);
+      setSuggestions([]);
     },
-    [setShouldShowSuggestions, setInputSelectedValue],
+    [setInputSelectedValue],
   );
 
   return (
@@ -74,9 +69,9 @@ const SearchArea = () => {
         inputSearchValue={inputSearchValue}
         inputSelectedValue={inputSelectedValue}
         handleInputChange={handleInputChange}
-        shouldRemoveBorderBottom={shouldShowSuggestions || Boolean(suggestionsNotFoundMessage)}
+        shouldRemoveBorderBottom={suggestions.length > 0 || Boolean(suggestionsNotFoundMessage)}
       />
-      {shouldShowSuggestions && (
+      {suggestions.length > 0 && (
         <Suggestions
           suggestions={suggestions}
           inputSearchValue={inputSearchValue}
