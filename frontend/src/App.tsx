@@ -1,5 +1,4 @@
-import Input from './components/Input';
-import Suggestions from './components/Suggestions';
+import SearchArea from './components/SearchArea';
 import './style.css';
 
 function App() {
@@ -7,10 +6,7 @@ function App() {
     <div className="wrapper">
       <h1 className="title">Auto Complete</h1>
       <p className="subtitle">Search about web development technologies</p>
-      <div className="search-area">
-        <Input />
-        <Suggestions />
-      </div>
+      <SearchArea />
     </div>
   );
 }

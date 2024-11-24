@@ -53,6 +53,11 @@
     border-bottom-right-radius: 10px;
 }
 
+.suggestions-wrapper p {
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 10px;
+}
 .suggestions-wrapper ul {
     list-style: none;
 }

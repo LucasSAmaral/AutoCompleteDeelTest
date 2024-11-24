@@ -1,34 +1,66 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AutoCompleteContext } from '../context/AutoComplete.context';
+import { AutoCompleteResponse } from '../../../types';
 
 export const AutoCompleteProvider = ({ children }: { children: React.ReactNode }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputSearchValue, setInputSearchValue] = useState('');
+  const [inputSelectedValue, setInputSelectedValue] = useState('');
+  const [noSuggestionsFoundMessage, setNoSuggestionsFoundMessage] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [shouldShowSuggestions, setShouldShowSuggestions] = useState(false);
 
   const fetchSuggestions = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:4000/api/autocomplete?search=${inputValue}`);
+      setNoSuggestionsFoundMessage('');
+      const response = await fetch(
+        `http://localhost:4000/api/autocomplete?search=${inputSearchValue}`,
+      );
 
       if (!response.ok) {
         throw new Error('Error on getting suggestions');
       }
 
-      const suggestionsArray = await response.json();
+      const suggestionsResponse: AutoCompleteResponse = await response.json();
 
-      setSuggestions(suggestionsArray);
+      if ('noSuggestionsFoundMessage' in suggestionsResponse) {
+        setNoSuggestionsFoundMessage(suggestionsResponse.noSuggestionsFoundMessage ?? '');
+      } else {
+        setSuggestions(suggestionsResponse.suggestions ?? []);
+      }
     } catch (error) {
       console.error(error);
     }
-  }, [inputValue]);
+  }, [inputSearchValue]);
 
   useEffect(() => {
-    if (inputValue !== '') {
+    if (inputSearchValue !== '') {
       fetchSuggestions();
+    } else {
+      setShouldShowSuggestions(false);
     }
-  }, [inputValue, fetchSuggestions]);
+  }, [inputSearchValue, fetchSuggestions]);
+
+  useEffect(() => {
+    if (suggestions.length === 0) {
+      setShouldShowSuggestions(false);
+    } else {
+      setShouldShowSuggestions(true);
+    }
+  }, [suggestions]);
 
   return (
-    <AutoCompleteContext.Provider value={{ inputValue, setInputValue, suggestions }}>
+    <AutoCompleteContext.Provider
+      value={{
+        inputSearchValue,
+        inputSelectedValue,
+        setInputSearchValue,
+        setInputSelectedValue,
+        suggestions,
+        shouldShowSuggestions,
+        setShouldShowSuggestions,
+        noSuggestionsFoundMessage,
+      }}
+    >
       {children}
     </AutoCompleteContext.Provider>
   );

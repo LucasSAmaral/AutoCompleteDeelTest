@@ -1,15 +1,25 @@
 import { createContext } from 'react';
 
 type AutoCompleteContext = {
-  inputValue: string;
+  inputSearchValue: string;
+  inputSelectedValue: string;
   suggestions: string[];
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  shouldShowSuggestions: boolean;
+  noSuggestionsFoundMessage: string;
+  setInputSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  setInputSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+  setShouldShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const AutoCompleteContext = createContext<AutoCompleteContext>({
-  inputValue: '',
+  inputSearchValue: '',
+  inputSelectedValue: '',
   suggestions: [],
-  setInputValue: () => {},
+  noSuggestionsFoundMessage: '',
+  shouldShowSuggestions: false,
+  setInputSearchValue: () => {},
+  setInputSelectedValue: () => {},
+  setShouldShowSuggestions: () => {},
 });
 
 AutoCompleteContext.displayName = 'AutoCompleteContext';
