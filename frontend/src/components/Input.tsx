@@ -1,20 +1,14 @@
 interface InputProps {
-  inputSearchValue: string;
-  inputSelectedValue: string;
+  inputValue: string;
   inputClassName: string;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputProps> = ({
-  inputSearchValue,
-  inputSelectedValue,
-  handleInputChange,
-  inputClassName,
-}) => {
+const Input: React.FC<InputProps> = ({ inputValue, handleInputChange, inputClassName }) => {
   return (
     <input
       className={`search-input ${inputClassName}`}
-      value={inputSelectedValue === '' ? inputSearchValue : inputSelectedValue}
+      value={inputValue}
       onChange={handleInputChange}
       type="search"
     />
