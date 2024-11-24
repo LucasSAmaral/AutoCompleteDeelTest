@@ -45,7 +45,8 @@
 }
 
 .suggestions-wrapper,
-.suggestions-not-found {
+.suggestions-not-found,
+.search-history-wrapper {
     width: 100%;
     background-color: #c2c1c1;
     border: 1px solid #333;
@@ -54,25 +55,37 @@
     border-bottom-right-radius: 10px;
 }
 
-.suggestions-not-found p {
+.suggestions-not-found p,
+.search-history-wrapper p {
     font-size: 12px;
     text-align: center;
     padding-bottom: 10px;
 }
-.suggestions-wrapper ul {
+.search-history-wrapper p {
+    text-align: left;
+    padding-left: 12px;
+    padding-bottom: 0;
+    text-decoration: underline;
+}
+
+.suggestions-wrapper ul,
+.search-history-wrapper ul {
     list-style: none;
 }
 
-.suggestions-wrapper li {
+.suggestions-wrapper li,
+.search-history-wrapper li {
     cursor: pointer;
     padding: 10px 12px;
 }
 
-.suggestions-wrapper li:hover {
+.suggestions-wrapper li:hover,
+.search-history-wrapper li:hover {
     background-color: #a5a5a5;
 }
 
-.suggestions-wrapper li:last-child {
+.suggestions-wrapper li:last-child,
+.search-history-wrapper li:last-child {
     margin-bottom: 0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
