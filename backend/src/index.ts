@@ -7,7 +7,7 @@ const port = 4000;
 
 app.use(cors());
 
-const webTechnologies = ['React', 'React Native', 'CSS', 'Rust', 'Styled-Components'];
+const webTechnologies = ['React', 'React Native', 'CSS', 'Rust', 'Styled Components'];
 
 app.get('/api/autocomplete', (req: Request, res: Response<AutoCompleteResponse>) => {
   const queryParams = req.query.search as string;

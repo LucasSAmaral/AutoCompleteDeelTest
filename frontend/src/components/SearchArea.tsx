@@ -77,7 +77,11 @@ const SearchArea = () => {
         shouldRemoveBorderBottom={shouldShowSuggestions || Boolean(suggestionsNotFoundMessage)}
       />
       {shouldShowSuggestions && (
-        <Suggestions suggestions={suggestions} handleSuggestionClick={handleSuggestionClick} />
+        <Suggestions
+          suggestions={suggestions}
+          inputSearchValue={inputSearchValue}
+          handleSuggestionClick={handleSuggestionClick}
+        />
       )}
       {suggestionsNotFoundMessage && (
         <SuggestionsNotFound>{suggestionsNotFoundMessage}</SuggestionsNotFound>

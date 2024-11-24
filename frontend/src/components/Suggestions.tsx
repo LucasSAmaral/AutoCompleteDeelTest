@@ -1,15 +1,22 @@
+import HighlightText from './HighlightText';
+
 interface SuggestionsProps {
+  inputSearchValue: string;
   suggestions: string[];
   handleSuggestionClick: (suggestion: string) => void;
 }
 
-const Suggestions: React.FC<SuggestionsProps> = ({ suggestions, handleSuggestionClick }) => {
+const Suggestions: React.FC<SuggestionsProps> = ({
+  suggestions,
+  inputSearchValue,
+  handleSuggestionClick,
+}) => {
   return (
     <div className="suggestions-wrapper">
       <ul>
         {suggestions.map((suggestion, index) => (
           <li key={`${suggestion}-${index}`} onClick={() => handleSuggestionClick(suggestion)}>
-            {suggestion}
+            <HighlightText suggestion={suggestion} inputSearchValue={inputSearchValue} />
           </li>
         ))}
       </ul>
