@@ -5,7 +5,7 @@ type AutoCompleteContext = {
   inputSelectedValue: string;
   suggestions: string[];
   shouldShowSuggestions: boolean;
-  noSuggestionsFoundMessage: string;
+  suggestionsNotFoundMessage: string;
   setInputSearchValue: React.Dispatch<React.SetStateAction<string>>;
   setInputSelectedValue: React.Dispatch<React.SetStateAction<string>>;
   setShouldShowSuggestions: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +15,7 @@ export const AutoCompleteContext = createContext<AutoCompleteContext>({
   inputSearchValue: '',
   inputSelectedValue: '',
   suggestions: [],
-  noSuggestionsFoundMessage: '',
+  suggestionsNotFoundMessage: '',
   shouldShowSuggestions: false,
   setInputSearchValue: () => {},
   setInputSelectedValue: () => {},

@@ -44,7 +44,8 @@
     padding: 12px;
 }
 
-.suggestions-wrapper {
+.suggestions-wrapper,
+.suggestions-not-found {
     width: 100%;
     background-color: #c2c1c1;
     border: 1px solid #333;
@@ -53,7 +54,7 @@
     border-bottom-right-radius: 10px;
 }
 
-.suggestions-wrapper p {
+.suggestions-not-found p {
     font-size: 12px;
     text-align: center;
     padding-bottom: 10px;

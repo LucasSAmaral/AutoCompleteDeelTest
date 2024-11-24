@@ -7,11 +7,14 @@ const Input = () => {
     setInputSearchValue,
     setInputSelectedValue,
     shouldShowSuggestions,
+    suggestionsNotFoundMessage,
   } = useAutoComplete();
 
   return (
     <input
-      className={`search-input ${shouldShowSuggestions ? 'no-border-bottom' : ''}`}
+      className={`search-input ${
+        shouldShowSuggestions || suggestionsNotFoundMessage ? 'no-border-bottom' : ''
+      }`}
       value={inputSelectedValue === '' ? inputSearchValue : inputSelectedValue}
       onChange={e => {
         setInputSelectedValue('');

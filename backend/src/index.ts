@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { AutoCompleteResponse } from '../../types';
 
 const app = express();
 
@@ -19,7 +18,7 @@ app.get('/api/autocomplete', (req: Request, res: Response<AutoCompleteResponse>)
 
   if (suggestions.length === 0) {
     res.json({
-      noSuggestionsFoundMessage: 'No technologies were found with this search terms.',
+      suggestionsNotFoundMessage: 'No technologies were found with this search terms.',
     });
   }
 

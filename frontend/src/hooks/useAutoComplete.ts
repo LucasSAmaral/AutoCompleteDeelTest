@@ -10,7 +10,7 @@ export const useAutoComplete = () => {
     suggestions,
     shouldShowSuggestions,
     setShouldShowSuggestions,
-    noSuggestionsFoundMessage,
+    suggestionsNotFoundMessage,
   } = useContext(AutoCompleteContext);
 
   return {
@@ -21,6 +21,6 @@ export const useAutoComplete = () => {
     suggestions,
     shouldShowSuggestions,
     setShouldShowSuggestions,
-    noSuggestionsFoundMessage,
+    suggestionsNotFoundMessage,
   };
 };

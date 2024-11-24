@@ -1,17 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AutoCompleteContext } from '../context/AutoComplete.context';
-import { AutoCompleteResponse } from '../../../types';
 
 export const AutoCompleteProvider = ({ children }: { children: React.ReactNode }) => {
   const [inputSearchValue, setInputSearchValue] = useState('');
   const [inputSelectedValue, setInputSelectedValue] = useState('');
-  const [noSuggestionsFoundMessage, setNoSuggestionsFoundMessage] = useState('');
+  const [suggestionsNotFoundMessage, setSuggestionsNotFoundMessage] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [shouldShowSuggestions, setShouldShowSuggestions] = useState(false);
 
   const fetchSuggestions = useCallback(async () => {
     try {
-      setNoSuggestionsFoundMessage('');
+      setSuggestionsNotFoundMessage('');
       const response = await fetch(
         `http://localhost:4000/api/autocomplete?search=${inputSearchValue}`,
       );
@@ -22,10 +21,11 @@ export const AutoCompleteProvider = ({ children }: { children: React.ReactNode }
 
       const suggestionsResponse: AutoCompleteResponse = await response.json();
 
-      if ('noSuggestionsFoundMessage' in suggestionsResponse) {
-        setNoSuggestionsFoundMessage(suggestionsResponse.noSuggestionsFoundMessage ?? '');
+      if ('suggestionsNotFoundMessage' in suggestionsResponse) {
+        setSuggestions([]);
+        setSuggestionsNotFoundMessage(suggestionsResponse.suggestionsNotFoundMessage);
       } else {
-        setSuggestions(suggestionsResponse.suggestions ?? []);
+        setSuggestions(suggestionsResponse.suggestions);
       }
     } catch (error) {
       console.error(error);
@@ -37,6 +37,7 @@ export const AutoCompleteProvider = ({ children }: { children: React.ReactNode }
       fetchSuggestions();
     } else {
       setShouldShowSuggestions(false);
+      setSuggestionsNotFoundMessage('');
     }
   }, [inputSearchValue, fetchSuggestions]);
 
@@ -58,7 +59,7 @@ export const AutoCompleteProvider = ({ children }: { children: React.ReactNode }
         suggestions,
         shouldShowSuggestions,
         setShouldShowSuggestions,
-        noSuggestionsFoundMessage,
+        suggestionsNotFoundMessage,
       }}
     >
       {children}

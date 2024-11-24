@@ -1,25 +1,13 @@
 import { useAutoComplete } from '../hooks/useAutoComplete';
 
 const Suggestions = () => {
-  const {
-    suggestions,
-    setInputSelectedValue,
-    shouldShowSuggestions,
-    setShouldShowSuggestions,
-    noSuggestionsFoundMessage,
-  } = useAutoComplete();
+  const { suggestions, setInputSelectedValue, shouldShowSuggestions, setShouldShowSuggestions } =
+    useAutoComplete();
 
   if (!shouldShowSuggestions) {
     return null;
   }
 
-  if (noSuggestionsFoundMessage) {
-    return (
-      <div className="suggestions-wrapper">
-        <p>{noSuggestionsFoundMessage}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="suggestions-wrapper">
