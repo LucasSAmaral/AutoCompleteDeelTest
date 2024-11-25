@@ -21,7 +21,6 @@ const Input: React.FC<InputProps> = ({
     <div className="input-wrapper">
       {/* Initially, the input had type="search", but it was not properly supported in some browsers. 
           So, I replaced it with a custom button to clear the input and focus it. */}
-
       <button
         className="clear-input-button"
         onClick={() => {

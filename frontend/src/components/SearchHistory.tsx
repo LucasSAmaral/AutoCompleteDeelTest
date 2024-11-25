@@ -4,6 +4,8 @@ interface SearchHistory {
   handleSearchHistoryClick: (suggestion: string) => void;
 }
 
+// I implemented a search history feature to allow the user to access recent search terms directly, 
+// avoiding unnecessary API calls to fetch recent items.
 const SearchHistory: React.FC<SearchHistory> = ({ handleSearchHistoryClick }) => {
   const localStorageHistory = getLocalStorageHistory();
 

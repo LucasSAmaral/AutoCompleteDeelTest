@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getLocalStorageHistory, setLocalStorageHistory } from '../helpers/localStorageHelpers';
 
+
+// The goal is to store up to 10 searched items in localStorage each time the searchHistory state is updated.
+// Once the history reaches 10 items, it will be sent to the API, ensuring the data persists even if localStorage is cleared.
 export const useSearchHistory = () => {
   const [searchHistory, setSearchHistory] = useState<string[]>(getLocalStorageHistory());
 
