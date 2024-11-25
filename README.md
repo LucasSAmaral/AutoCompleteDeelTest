@@ -40,3 +40,68 @@ npm run start:both
 
 - The <strong>backend application</strong> will be running at `http://localhost:4000`.
 
+### About the Application
+
+The backend returns a list of web technologies as the user types their name in the input field.
+
+You can search for the following technologies:
+
+```
+Angular
+ASP.NET
+AWS
+Babel
+Bootstrap
+CSS
+Cypress
+Django
+Docker
+Elixir
+ESLint
+Express
+Firebase
+Flutter
+Gatsby
+Google Cloud
+GraphQL
+Heroku
+HTML
+JavaScript
+Jest
+jQuery
+Kubernetes
+Material-UI
+Mocha
+MongoDB
+Netlify
+NestJs
+NextJs
+Node.js
+PHP
+PostgreSQL
+Prettier
+Prisma
+React
+React Native
+React Testing Library
+Redux
+Rust
+RxJS
+SASS
+SCSS
+SQL
+Storybook
+Styled Components
+Svelte
+Tailwind CSS
+TypeScript
+Vercel
+Vite
+Vue
+Webpack
+WordPress
+```
+
+After selecting one of the returned technologies, you can view a search history containing the latest searched technologies, but only when the input is focused.
+
+This history is saved in `localStorage` and is also posted to the API to persist data, ensuring it remains available even if the browser is refreshed or the `localStorage` is cleared.
