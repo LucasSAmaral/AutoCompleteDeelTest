@@ -6,6 +6,9 @@ import { useFetchSuggestions } from '../hooks/useFetchSuggestions';
 import SearchHistory from './SearchHistory';
 import { useSearchHistory } from '../hooks/useSearchHistory';
 
+
+// I chose to pass these states through props since the component hierarchy is shallow (just one layer).
+// Initially, I considered using context, but it would cause unnecessary re-renders on every component update.
 const SearchArea = () => {
   const [inputSearchValue, setInputSearchValue] = useState('');
   const [inputSelectedValue, setInputSelectedValue] = useState('');
@@ -19,6 +22,11 @@ const SearchArea = () => {
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setInputSelectedValue('');
     setInputSearchValue(event.target.value);
+  }, []);
+
+  const handleInputClear = useCallback(() => {
+    setInputSearchValue('');
+    setInputSelectedValue('');
   }, []);
 
   const handleSuggestionClick = useCallback(
@@ -44,6 +52,7 @@ const SearchArea = () => {
     <div className="search-area">
       <Input
         inputValue={inputSelectedValue === '' ? inputSearchValue : inputSelectedValue}
+        handleInputClear={handleInputClear}
         handleInputChange={handleInputChange}
         setIsInputFocused={setIsInputFocused}
         inputClassName={

@@ -34,6 +34,19 @@
     margin-bottom: 20px;
 }
 
+.input-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+.clear-input-button {
+    position: absolute;
+    right: 15px;
+    top: 9px;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 20px;
+}
 .search-input {
     outline: none;
     border: 1px solid #333;
