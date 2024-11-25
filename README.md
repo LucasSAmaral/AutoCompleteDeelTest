@@ -40,11 +40,11 @@ npm run start:both
 
 - The <strong>backend application</strong> will be running at `http://localhost:4000`.
 
-### About the Application
+### About the Applications
 
-The backend returns a list of web technologies as the user types their name in the input field.
+The backend returns a list of web technologies as the user types their names in the input field.
 
-You can search for the following technologies:
+On the frontend, you can search for the following technologies:
 
 ```
 Angular
