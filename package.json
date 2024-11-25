@@ -4,7 +4,7 @@
   "scripts": {
     "start:front": "npm run dev --prefix frontend",
     "start:back": "npm run dev --prefix backend",
-    "start:both": "concurrently --names \"FRONT,BACK\" \"npm run start:front\" \"npm run start:back\"",
+    "dev": "concurrently --names \"FRONT,BACK\" \"npm run start:front\" \"npm run start:back\"",
     "install:front": "npm install --prefix frontend",
     "install:back": "npm install --prefix backend",
     "install:both": "npm run install:front && npm run install:back",
