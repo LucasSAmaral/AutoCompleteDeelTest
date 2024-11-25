@@ -6,7 +6,7 @@ I chose to create a monorepo to include both a <strong>frontend React applicatio
 
 ### Installing the Applications
 
-1. Select Node.js Version
+1. <strong>Select Node.js Version</strong>
 
 This project includes a `.nvmrc` file specifying Node.js version 20. To ensure you are using the correct version, run the following command in the terminal (if Node.js 20 is already installed):
 
@@ -20,13 +20,28 @@ nvm install 20
 ```
 Note: This project also works with Node.js versions 18 and 19.
 
-2. Install Dependencies
+2. <strong>Install Dependencies</strong>
 
-Since this is a monorepo with both frontend and backend applications, you need to install dependencies for both. Use the following command to install all dependencies:
+To install all dependencies at once, you can run the following script:
+
+```bash
+npm run install:all
+```
+If you encounter any issues after installing, try deleting all `package-lock.json` files and the `node_modules` directories, then reinstall the dependencies in separate steps.
+
+First, install the monorepo dependencies:
+
+```bash
+npm install
+```
+
+Next, install the dependencies for both the frontend and backend applications using the following command:
 
 ```bash
 npm run install:both
 ```
+If you prefer to install them one at a time, you can run `npm run install:front` to install the frontend dependencies and `npm run install:back` to install the backend dependencies.
+
 
 ### Running the Applications
 
