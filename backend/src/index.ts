@@ -55,8 +55,9 @@ app.get('/api/autocomplete/history', (_: Request, res: Response<string[]>) => {
 
 app.post(
   '/api/autocomplete/history',
-  (req: AutoCompleteRequest<{}, { searchHistory: string[] }>, _: Response) => {
+  (req: AutoCompleteRequest<{}, { searchHistory: string[] }>, res: Response) => {
     searchHistory = req.body.searchHistory;
+    res.status(204).send();
   },
 );
 
