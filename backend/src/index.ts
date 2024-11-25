@@ -25,6 +25,50 @@ const webTechnologies = [
   'SCSS',
   'SASS',
   'HTML',
+  'Angular',
+  'Vue',
+  'NextJs',
+  'NestJs',
+  'Flutter',
+  'TypeScript',
+  'JavaScript',
+  'Node.js',
+  'Express',
+  'Webpack',
+  'Vite',
+  'GraphQL',
+  'Redux',
+  'RxJS',
+  'jQuery',
+  'Tailwind CSS',
+  'Bootstrap',
+  'Material-UI',
+  'Svelte',
+  'Gatsby',
+  'WordPress',
+  'PHP',
+  'Django',
+  'ASP.NET',
+  'Elixir',
+  'SQL',
+  'PostgreSQL',
+  'MongoDB',
+  'Firebase',
+  'Prisma',
+  'Docker',
+  'Kubernetes',
+  'AWS',
+  'Azure',
+  'Google Cloud',
+  'Vercel',
+  'Netlify',
+  'Heroku',
+  'Babel',
+  'ESLint',
+  'Prettier',
+  'Mocha',
+  'Jest',
+  'Storybook',
 ];
 
 let searchHistory: string[] = [];
@@ -55,8 +99,13 @@ app.get('/api/autocomplete/history', (_: Request, res: Response<string[]>) => {
 
 app.post(
   '/api/autocomplete/history',
-  (req: AutoCompleteRequest<{}, { searchHistory: string[] }>, res: Response) => {
+  (req: AutoCompleteRequest<{}, { searchHistory: string[] }>, res: Response<string[]>) => {
     searchHistory = req.body.searchHistory;
+
+    if (searchHistory.length === 11) {
+      searchHistory.shift();
+    }
+
     res.status(204).send();
   },
 );
