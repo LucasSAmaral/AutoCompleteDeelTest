@@ -4,22 +4,6 @@ import { getLocalStorageHistory, setLocalStorageHistory } from '../helpers/local
 export const useSearchHistory = () => {
   const [searchHistory, setSearchHistory] = useState<string[]>(getLocalStorageHistory());
 
-  const postSearchHistory = useCallback(async (searchHistory: string[]) => {
-    try {
-      const response = await fetch('http://localhost:4000/api/autocomplete/history', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ searchHistory }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error on posting searchHistory');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
   const getSearchHistory = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:4000/api/autocomplete/history');
@@ -36,6 +20,27 @@ export const useSearchHistory = () => {
     }
   }, []);
 
+  const postSearchHistory = useCallback(
+    async (searchHistory: string[]) => {
+      try {
+        const response = await fetch('http://localhost:4000/api/autocomplete/history', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ searchHistory }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error on posting searchHistory');
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        getSearchHistory();
+      }
+    },
+    [getSearchHistory],
+  );
+
   useEffect(() => {
     if (searchHistory.length === 0) {
       getSearchHistory();
@@ -43,7 +48,7 @@ export const useSearchHistory = () => {
   }, [searchHistory.length, getSearchHistory]);
 
   useEffect(() => {
-    if (searchHistory.length % 5 === 0 && searchHistory.length > 0) {
+    if (searchHistory.length === 11 && searchHistory.length > 0) {
       setLocalStorageHistory(searchHistory);
       postSearchHistory(searchHistory);
     } else {
