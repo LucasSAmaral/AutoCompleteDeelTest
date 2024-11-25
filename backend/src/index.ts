@@ -83,7 +83,7 @@ app.get(
 
     if (suggestions.length === 0) {
       res.json({
-        suggestionsNotFoundMessage: 'No technologies were found with this search terms.',
+        suggestionsNotFoundMessage: 'No technologies were found with these search terms.',
       });
       return;
     }
