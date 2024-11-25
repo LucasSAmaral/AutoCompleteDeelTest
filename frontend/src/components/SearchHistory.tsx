@@ -9,7 +9,7 @@ const SearchHistory: React.FC<SearchHistory> = ({ handleSearchHistoryClick }) =>
 
   if (localStorageHistory.length === 0) return null;
 
-  //I reversed the list to show the most recents serched items on top.
+  // Reversed the list to display the most recently searched items at the top.
   const reversedLocalStorageHistory = localStorageHistory.reverse();
 
   return (

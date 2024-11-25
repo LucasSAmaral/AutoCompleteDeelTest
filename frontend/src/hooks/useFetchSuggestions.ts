@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-// This hook centralizes the fetching logic.
-// I decided to create it to separete this responsibility from SearchArea Component and to make it more readable.
+// This hook centralizes the fetching logic, separating it from the SearchArea component to improve readability and maintainability.
 export const useFetchSuggestions = (inputSearchValue: string) => {
   const [suggestionsNotFoundMessage, setSuggestionsNotFoundMessage] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -31,7 +30,7 @@ export const useFetchSuggestions = (inputSearchValue: string) => {
     }
   }, [inputSearchValue]);
 
-  // I created a debounce effect to fetch the api after 300ms to avoid fetching everytime a person types a letter on search input
+  // Implemented debounce to delay API fetch by 300ms, reducing unnecessary requests as the user types.
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (inputSearchValue !== '') {
