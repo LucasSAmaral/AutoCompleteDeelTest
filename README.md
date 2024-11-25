@@ -4,7 +4,7 @@ This test consists of preparing an <strong>auto-complete component</strong> usin
 
 I chose to create a monorepo to include both a <strong>frontend React application</strong> and a <strong>backend Express application.</strong> This setup allows for requests to be made to a real API.
 
-### Installing the Application
+### Installing the Applications
 
 1. Select Node.js Version
 
