@@ -26,6 +26,7 @@ const Input: React.FC<InputProps> = ({
         onClick={() => {
           handleInputClear();
           inputRef.current?.focus();
+          setTimeout(() => setIsInputFocused(true), 200);
         }}
       >
         X
