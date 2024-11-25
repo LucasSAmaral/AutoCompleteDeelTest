@@ -121,4 +121,4 @@ WordPress
 
 After selecting one of the returned technologies, you can view a search history containing the latest searched technologies, but only when the input is focused.
 
-This history is saved in `localStorage` and is also posted to the API to persist data, ensuring it remains available even if the browser is refreshed or the `localStorage` is cleared.
+This history is saved in `localStorage` and is posted to the API only after it reaches 10 items. This ensures the data remains available even if the browser is refreshed or the `localStorage` is cleared.
