@@ -2,7 +2,7 @@
 
 This test consists of preparing an <strong>auto-complete component</strong> using <strong>React and TypeScript.</strong>
 
-I chose to create a monorepo to include both a <strong>frontend React application</strong> and a <strong>backend Express application.</strong> This setup allows for requests to be made to a real API.
+I chose to create a monorepo that includes both a <strong>frontend React application</strong> and a <strong>backend Express application.</strong> This setup allows for requests to be made to a real API.
 
 ### Installing the Applications
 
@@ -18,7 +18,7 @@ If you don't have Node.js version 20 installed, you can install and select it by
 ```bash
 nvm install 20
 ```
-Note: This project also works with Node.js versions 18 and 19.
+> **Note**: This project has been tested with Node.js versions 18 and 19 as well.
 
 2. <strong>Install Dependencies</strong>
 
@@ -27,9 +27,11 @@ To install all dependencies at once, you can run the following script:
 ```bash
 npm run install:all
 ```
-If you encounter any issues after installing, try deleting all `package-lock.json` files and the `node_modules` directories, then reinstall the dependencies in separate steps.
 
-First, install the monorepo dependencies:
+> **Note**: Installing the dependencies one at a time is an optional alternative. You may proceed to [**Running the Applications**](#running-the-applications) if you want to.
+
+
+If you prefer to install the dependencies separately, first install the monorepo dependencies:
 
 ```bash
 npm install
@@ -40,7 +42,7 @@ Next, install the dependencies for both the frontend and backend applications us
 ```bash
 npm run install:both
 ```
-If you prefer to install them one at a time, you can run `npm run install:front` to install the frontend dependencies and `npm run install:back` to install the backend dependencies.
+Alternatively, you can install them one at a time by running `npm run install:front` to install the frontend dependencies, and `npm run install:back` to install the backend dependencies.
 
 
 ### Running the Applications
@@ -48,7 +50,7 @@ If you prefer to install them one at a time, you can run `npm run install:front`
 You can start both applications simultaneously with the following command:
 
 ```bash
-npm run start:both
+npm run dev
 ```
 
 - The <strong>frontend application</strong> will be accessible at `http://localhost:3000` in your browser.
