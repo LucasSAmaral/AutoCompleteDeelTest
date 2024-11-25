@@ -4,6 +4,8 @@ interface InputProps {
   inputValue: string;
   inputClassName: string;
   handleInputClear: () => void;
+  // These types are displayed when we hover over the setState function returned by useState.
+  // I find this an easy way to type component props in case the component needs to receive a setState function as a prop.
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 }
