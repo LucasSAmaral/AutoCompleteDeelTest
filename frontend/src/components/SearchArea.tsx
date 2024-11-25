@@ -11,10 +11,10 @@ const SearchArea = () => {
   const [inputSelectedValue, setInputSelectedValue] = useState('');
   const [isInputFocused, setIsInputFocused] = useState(false);
 
-  const { searchHistory, setSearchHistory } = useSearchHistory();
-
   const { suggestions, setSuggestions, suggestionsNotFoundMessage } =
     useFetchSuggestions(inputSearchValue);
+
+  const { searchHistory, setSearchHistory } = useSearchHistory();
 
   const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setInputSelectedValue('');
