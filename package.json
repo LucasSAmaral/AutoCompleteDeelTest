@@ -9,6 +9,7 @@
     "install:back": "npm install --prefix backend",
     "install:both": "npm run install:front && npm run install:back",
     "install:all": "npm install && npm run install:both",
+    "test": "npm run test --prefix frontend",
     "test:watch": "npm run test:watch --prefix frontend"
   },
   "devDependencies": {

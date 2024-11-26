@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:watch": "vitest --watch",
-    "coverage": "vitest run --coverage"
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "react": "^18.3.1",
