@@ -7,7 +7,16 @@ import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
 
 const server = setupServer(
-  http.get('http://localhost:4000/api/autocomplete?search=A', () => {
+  http.get('http://localhost:4000/api/autocomplete', ({ request }) => {
+    // This searchParams checking is only to avoid a warning on terminal.
+    const url = new URL(request.url);
+
+    const search = url.searchParams.get('search');
+
+    if (!search) {
+      return new HttpResponse(null, { status: 404 });
+    }
+
     return HttpResponse.json({
       suggestions: ['Angular', 'ASP.NET', 'AWS'],
     });
@@ -63,7 +72,16 @@ describe('SearchArea component', () => {
 
   it('should show suggestionsNotFoundMessage', async () => {
     server.resetHandlers(
-      http.get('http://localhost:4000/api/autocomplete?search=A', () => {
+      http.get('http://localhost:4000/api/autocomplete', ({ request }) => {
+        // Same thing. Only to avoid a warning on terminal.
+        const url = new URL(request.url);
+
+        const search = url.searchParams.get('search');
+
+        if (!search) {
+          return new HttpResponse(null, { status: 404 });
+        }
+
         return HttpResponse.json({
           suggestionsNotFoundMessage: 'No technologies were found with these search terms.',
         });
