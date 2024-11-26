@@ -15,7 +15,11 @@ const Suggestions: React.FC<SuggestionsProps> = ({
     <div className="suggestions-wrapper">
       <ul>
         {suggestions.map((suggestion, index) => (
-          <li key={`${suggestion}-${index}`} onClick={() => handleSuggestionClick(suggestion)}>
+          <li
+            data-testid={suggestion}
+            key={`${suggestion}-${index}`}
+            onClick={() => handleSuggestionClick(suggestion)}
+          >
             <HighlightText suggestion={suggestion} inputSearchValue={inputSearchValue} />
           </li>
         ))}

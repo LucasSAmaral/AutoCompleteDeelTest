@@ -57,6 +57,20 @@ npm run dev
 
 - The <strong>backend application</strong> will be running at `http://localhost:4000`.
 
+### Running the Tests
+
+You can run the tests with the command:
+
+```bash
+npm run test
+```
+
+In case you want to run with watch mode:
+
+```bash
+npm run test:watch
+```
+
 ### About the Applications
 
 The backend returns a list of web technologies as the user types their names in the input field.

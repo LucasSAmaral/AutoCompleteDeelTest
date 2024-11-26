@@ -1,6 +1,6 @@
 // I created these helper functions to make it easier to get and set data in localStorage.
 
-const LOCAL_STORAGE_HISTORY_KEY = 'localSearchHistory';
+export const LOCAL_STORAGE_HISTORY_KEY = 'localSearchHistory';
 
 export const getLocalStorageHistory = (): string[] => {
   const storageHistory = localStorage.getItem(LOCAL_STORAGE_HISTORY_KEY);
