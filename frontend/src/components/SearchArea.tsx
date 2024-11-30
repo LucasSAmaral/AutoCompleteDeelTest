@@ -1,37 +1,37 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import Input from './Input';
 import Suggestions from './Suggestions';
 import SuggestionsNotFound from './SuggestionsNotFound';
 import { useFetchSuggestions } from '../hooks/useFetchSuggestions';
 import SearchHistory from './SearchHistory';
 import { useSearchHistory } from '../hooks/useSearchHistory';
-
+import { useInputReducer } from '../hooks/useInputReducer';
 
 // I chose to pass these states through props since the component hierarchy is shallow (just one layer).
 // Initially, I considered using context, but it would cause unnecessary re-renders on every component update.
 const SearchArea = () => {
-  const [inputSearchValue, setInputSearchValue] = useState('');
-  const [inputSelectedValue, setInputSelectedValue] = useState('');
-  const [isInputFocused, setIsInputFocused] = useState(false);
+  const { state, dispatch } = useInputReducer();
 
-  const { suggestions, setSuggestions, suggestionsNotFoundMessage } =
-    useFetchSuggestions(inputSearchValue);
+  const { suggestions, setSuggestions, suggestionsNotFoundMessage } = useFetchSuggestions(
+    state.inputSearchValue,
+  );
 
   const { searchHistory, setSearchHistory } = useSearchHistory();
 
-  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputSelectedValue('');
-    setInputSearchValue(event.target.value);
-  }, []);
+  const handleInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({ type: 'setSearchValue', payload: event.target.value });
+    },
+    [dispatch],
+  );
 
   const handleInputClear = useCallback(() => {
-    setInputSearchValue('');
-    setInputSelectedValue('');
-  }, []);
+    dispatch({ type: 'clearValues' });
+  }, [dispatch]);
 
   const handleSuggestionClick = useCallback(
     (suggestion: string) => {
-      setInputSelectedValue(suggestion);
+      dispatch({ type: 'setSelectedValue', payload: suggestion });
       setSearchHistory(prev => {
         if (!prev.includes(suggestion)) {
           return [...prev, suggestion];
@@ -41,41 +41,51 @@ const SearchArea = () => {
       });
       setSuggestions([]);
     },
-    [setSuggestions, setSearchHistory],
+    [dispatch, setSuggestions, setSearchHistory],
   );
 
-  const handleSearchHistoryClick = useCallback((history: string) => {
-    setInputSelectedValue(history);
-  }, []);
+  const handleSearchHistoryClick = useCallback(
+    (history: string) => {
+      dispatch({ type: 'setSelectedValue', payload: history });
+    },
+    [dispatch],
+  );
+
+  const setIsInputFocused = useCallback(
+    (isInputFocused: boolean) => dispatch({ type: 'setFocus', payload: isInputFocused }),
+    [dispatch],
+  );
 
   return (
     <div className="search-area">
       <Input
-        inputValue={inputSelectedValue === '' ? inputSearchValue : inputSelectedValue}
+        inputValue={
+          state.inputSelectedValue === '' ? state.inputSearchValue : state.inputSelectedValue
+        }
         handleInputClear={handleInputClear}
         handleInputChange={handleInputChange}
         setIsInputFocused={setIsInputFocused}
         inputClassName={
-          isInputFocused &&
+          state.isInputFocused &&
           (searchHistory.length > 0 || suggestions.length > 0 || suggestionsNotFoundMessage)
             ? 'no-border-bottom'
             : ''
         }
       />
 
-      {suggestions.length > 0 && isInputFocused && (
+      {suggestions.length > 0 && state.isInputFocused && (
         <Suggestions
           suggestions={suggestions}
-          inputSearchValue={inputSearchValue}
+          inputSearchValue={state.inputSearchValue}
           handleSuggestionClick={handleSuggestionClick}
         />
       )}
 
-      {suggestionsNotFoundMessage && isInputFocused && (
+      {suggestionsNotFoundMessage && state.isInputFocused && (
         <SuggestionsNotFound>{suggestionsNotFoundMessage}</SuggestionsNotFound>
       )}
 
-      {suggestions.length === 0 && isInputFocused && !suggestionsNotFoundMessage && (
+      {suggestions.length === 0 && state.isInputFocused && !suggestionsNotFoundMessage && (
         <SearchHistory handleSearchHistoryClick={handleSearchHistoryClick} />
       )}
     </div>
