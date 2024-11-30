@@ -51,7 +51,7 @@ export const useSearchHistory = () => {
   }, [searchHistory.length, getSearchHistory]);
 
   useEffect(() => {
-    if (searchHistory.length === 11 && searchHistory.length > 0) {
+    if (searchHistory.length === 11) {
       setLocalStorageHistory(searchHistory);
       postSearchHistory(searchHistory);
     } else {
