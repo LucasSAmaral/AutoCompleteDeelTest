@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface HighlightTextProps {
   suggestion: string;
@@ -30,4 +30,4 @@ const HighlightText: React.FC<HighlightTextProps> = ({ suggestion, inputSearchVa
   );
 };
 
-export default HighlightText;
+export default memo(HighlightText);

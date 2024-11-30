@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 
 interface InputProps {
   inputValue: string;
@@ -47,4 +47,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default memo(Input);

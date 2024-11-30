@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 
 // This hook centralizes the fetching logic, separating it from the SearchArea component to improve readability and maintainability.
 export const useFetchSuggestions = (inputSearchValue: string) => {
@@ -44,5 +44,7 @@ export const useFetchSuggestions = (inputSearchValue: string) => {
     return () => clearTimeout(timeout);
   }, [inputSearchValue, fetchSuggestions]);
 
-  return { suggestions, setSuggestions, suggestionsNotFoundMessage };
+  const memoizedSuggestions = useMemo(() => suggestions, [suggestions]);
+
+  return { suggestions: memoizedSuggestions, setSuggestions, suggestionsNotFoundMessage };
 };

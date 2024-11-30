@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import HighlightText from './HighlightText';
 
 interface SuggestionsProps {
@@ -28,4 +29,4 @@ const Suggestions: React.FC<SuggestionsProps> = ({
   );
 };
 
-export default Suggestions;
+export default memo(Suggestions);

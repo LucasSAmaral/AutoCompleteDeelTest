@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { getLocalStorageHistory } from '../helpers/localStorageHelpers';
 
 interface SearchHistory {
   handleSearchHistoryClick: (suggestion: string) => void;
 }
 
-// I implemented a search history feature to allow the user to access recent search terms directly, 
+// I implemented a search history feature to allow the user to access recent search terms directly,
 // avoiding unnecessary API calls to fetch recent items.
 const SearchHistory: React.FC<SearchHistory> = ({ handleSearchHistoryClick }) => {
   const localStorageHistory = getLocalStorageHistory();
@@ -28,4 +29,4 @@ const SearchHistory: React.FC<SearchHistory> = ({ handleSearchHistoryClick }) =>
   );
 };
 
-export default SearchHistory;
+export default memo(SearchHistory);
